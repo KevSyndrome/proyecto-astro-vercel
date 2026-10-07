@@ -1,0 +1,140 @@
+:root {
+  --papel: #f3f6f8;
+  --blanco: #ffffff;
+  --tinta: #16222e;
+  --tinta-suave: #4a5b6b;
+  --linea: #d5dee5;
+  --main: #0e7490;
+  --feature: #c2410c;
+  --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Consolas, monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+a { color: var(--main); text-underline-offset: 3px; }
+a:focus-visible, summary:focus-visible {
+  outline: 3px solid var(--feature);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.wrap {
+  width: min(100% - 2.5rem, 62rem);
+  margin-inline: auto;
+}
+
+/* Encabezado */
+.top { border-bottom: 1px solid var(--linea); }
+.top .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem 2rem;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 1rem;
+}
+.marca { font-weight: 700; letter-spacing: -.01em; }
+.top nav { display: flex; gap: 1.5rem; }
+.top nav a { color: var(--tinta); text-decoration: none; font-weight: 500; }
+.top nav a:hover { color: var(--main); text-decoration: underline; }
+
+/* Portada */
+.hero { padding-block: clamp(3rem, 8vw, 6rem) 2rem; }
+.hero h1 {
+  font-size: clamp(2.25rem, 6vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -.03em;
+  margin: 0 0 1.25rem;
+  max-width: 16ch;
+}
+.hero p.lead {
+  max-width: 52ch;
+  color: var(--tinta-suave);
+  font-size: 1.2rem;
+  margin: 0 0 2.5rem;
+}
+.grafo {
+  background: var(--blanco);
+  border: 1px solid var(--linea);
+  padding: 1rem 1rem .5rem;
+  overflow-x: auto;
+}
+.grafo svg { display: block; width: 100%; min-width: 34rem; height: auto; }
+.grafo text { font-family: var(--mono); font-size: 13px; fill: var(--tinta); }
+.grafo .suave { fill: var(--tinta-suave); }
+.grafo-pie {
+  margin: .5rem 0 0;
+  font-size: .9rem;
+  color: var(--tinta-suave);
+}
+
+/* Secciones */
+section { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
+section h2 {
+  font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+  letter-spacing: -.02em;
+  line-height: 1.15;
+  margin: 0 0 1.5rem;
+}
+.intro { max-width: 60ch; color: var(--tinta-suave); margin: 0 0 2rem; }
+
+/* Flujo: es una secuencia real, por eso va numerado */
+.pasos { list-style: none; margin: 0; padding: 0; counter-reset: paso; }
+.pasos li {
+  counter-increment: paso;
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: 0 1rem;
+  padding-block: 1.25rem;
+  border-top: 1px solid var(--linea);
+}
+.pasos li::before {
+  content: counter(paso);
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 1.5rem;
+  color: var(--main);
+  grid-row: span 2;
+}
+.pasos h3 { margin: 0; font-size: 1.15rem; }
+.pasos p { margin: .25rem 0 0; color: var(--tinta-suave); max-width: 60ch; }
+code {
+  font-family: var(--mono);
+  font-size: .9em;
+  background: #e6edf2;
+  padding: .1em .4em;
+  border-radius: 3px;
+}
+
+/* Tecnologías */
+.tecnologias { display: grid; gap: 1.5rem 2.5rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+.tecnologias h3 { margin: 0 0 .25rem; font-size: 1.15rem; }
+.tecnologias p { margin: 0; color: var(--tinta-suave); }
+.tecnologias > div { border-left: 4px solid var(--main); padding-left: 1rem; }
+.tecnologias > div:nth-child(2) { border-color: var(--feature); }
+.tecnologias > div:nth-child(3) { border-color: var(--tinta); }
+
+/* Ventajas y desventajas */
+.dos { display: grid; gap: 2rem 3rem; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); }
+.dos h3 { margin: 0 0 .75rem; font-size: 1.15rem; }
+.dos ul { margin: 0; padding-left: 1.2rem; }
+.dos li { margin-bottom: .5rem; }
+.dos li::marker { color: var(--main); }
+.dos > div:last-child li::marker { color: var(--feature); }
+
+/* Pie */
+footer { border-top: 1px solid var(--linea); padding-block: 2rem 3rem; color: var(--tinta-suave); font-size: .95rem; }
+footer ul { list-style: none; padding: 0; margin: .5rem 0 0; display: flex; flex-wrap: wrap; gap: .25rem 1.5rem; }
+footer p { margin: 0; }

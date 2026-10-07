@@ -1,0 +1,141 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+// Edita estos datos con los de tu equipo.
+const materia = "Instalación web · Unidad 2";
+const equipo = ["Nombre Apellido 1", "Nombre Apellido 2", "Nombre Apellido 3"];
+
+const pasos = [
+  { titulo: "Crear el repositorio", texto: "Se crea el repositorio en GitHub y se clona en la computadora con git clone." },
+  { titulo: "Abrir una rama de trabajo", texto: "Los cambios no se hacen en main. Se crea una rama con git switch -c feature/pagina-inicio." },
+  { titulo: "Guardar cambios con commits", texto: "Cada avance se guarda con un mensaje claro: estructura, estilos y contenido por separado." },
+  { titulo: "Abrir un Pull Request", texto: "Se sube la rama a GitHub y se propone unirla a main. Aquí se revisan los cambios y corre la verificación automática." },
+  { titulo: "Unir a main", texto: "Con el Pull Request aprobado, la rama se une a main y queda registrada en el historial." },
+  { titulo: "Despliegue automático", texto: "Vercel detecta el cambio en main, compila el sitio con Astro y publica la nueva versión." },
+];
+
+const ventajas = [
+  "Gratis para proyectos escolares y personales.",
+  "Despliega solo con cada push a main.",
+  "Genera una vista previa por cada rama y Pull Request.",
+  "Incluye HTTPS sin configurar nada.",
+  "No hay servidor que instalar ni mantener.",
+];
+const desventajas = [
+  "Se tiene menos control que en una máquina virtual propia.",
+  "Se depende de la plataforma y de sus límites gratuitos.",
+  "No se practica la administración de servidores (Linux, Nginx).",
+  "Los cambios en el entorno se limitan a lo que Vercel permite.",
+];
+---
+<Layout title="Control de versiones con Git, Astro y Vercel">
+  <header class="top">
+    <div class="wrap">
+      <span class="marca">{materia}</span>
+      <nav aria-label="Principal">
+        <a href="#flujo">Flujo de trabajo</a>
+        <a href="#tecnologias">Tecnologías</a>
+        <a href="#balance">Ventajas y desventajas</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap hero">
+      <h1>Cada cambio queda en el historial.</h1>
+      <p class="lead">
+        Sitio de práctica sobre control de versiones: el código vive en Git y GitHub,
+        los cambios se revisan en ramas y Vercel publica cada versión aprobada.
+      </p>
+
+      <figure class="grafo" style="margin:0">
+        <svg viewBox="0 0 720 190" role="img" aria-labelledby="grafo-t grafo-d">
+          <title id="grafo-t">Historial de ramas del proyecto</title>
+          <desc id="grafo-d">La rama main avanza en línea recta. La rama feature/pagina-inicio sale de main, acumula tres commits y vuelve a unirse a main con un Pull Request.</desc>
+
+          <line x1="30" y1="45" x2="690" y2="45" stroke="#0e7490" stroke-width="4" stroke-linecap="round" />
+          <path d="M190 45 C 215 45, 215 130, 250 130 L 450 130 C 485 130, 485 45, 510 45" fill="none" stroke="#c2410c" stroke-width="4" stroke-linecap="round" />
+
+          <circle cx="70" cy="45" r="8" fill="#fff" stroke="#0e7490" stroke-width="4" />
+          <circle cx="190" cy="45" r="8" fill="#fff" stroke="#0e7490" stroke-width="4" />
+          <circle cx="510" cy="45" r="8" fill="#fff" stroke="#0e7490" stroke-width="4" />
+          <circle cx="640" cy="45" r="8" fill="#16222e" stroke="#0e7490" stroke-width="4" />
+
+          <circle cx="280" cy="130" r="8" fill="#fff" stroke="#c2410c" stroke-width="4" />
+          <circle cx="350" cy="130" r="8" fill="#fff" stroke="#c2410c" stroke-width="4" />
+          <circle cx="420" cy="130" r="8" fill="#fff" stroke="#c2410c" stroke-width="4" />
+
+          <text x="30" y="22">main</text>
+          <text x="70" y="75" text-anchor="middle" class="suave">inicio</text>
+          <text x="190" y="75" text-anchor="middle" class="suave">base</text>
+          <text x="510" y="75" text-anchor="middle" class="suave">merge PR</text>
+          <text x="640" y="75" text-anchor="middle" class="suave">en Vercel</text>
+
+          <text x="250" y="162" class="suave">feature/pagina-inicio</text>
+          <text x="280" y="108" text-anchor="middle" class="suave">1</text>
+          <text x="350" y="108" text-anchor="middle" class="suave">2</text>
+          <text x="420" y="108" text-anchor="middle" class="suave">3</text>
+        </svg>
+        <figcaption class="grafo-pie">Una rama sale de main, acumula commits y regresa con un Pull Request.</figcaption>
+      </figure>
+    </div>
+
+    <section id="flujo">
+      <div class="wrap">
+        <h2>Cómo se trabajó este proyecto</h2>
+        <p class="intro">El flujo es el mismo en cada cambio, sea grande o pequeño. Así el historial cuenta qué se hizo y por qué.</p>
+        <ol class="pasos">
+          {pasos.map((p) => (
+            <li>
+              <h3>{p.titulo}</h3>
+              <p>{p.texto}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section id="tecnologias">
+      <div class="wrap">
+        <h2>Tecnologías utilizadas</h2>
+        <div class="tecnologias">
+          <div>
+            <h3>Git y GitHub</h3>
+            <p>Git registra cada versión del código. GitHub guarda el repositorio y permite revisar cambios con Pull Requests.</p>
+          </div>
+          <div>
+            <h3>Astro</h3>
+            <p>Framework que genera un sitio estático, rápido y con poco JavaScript. Vercel lo reconoce sin configuración.</p>
+          </div>
+          <div>
+            <h3>Vercel</h3>
+            <p>Plataforma que compila y publica el sitio en cada push a main, y crea vistas previas para las demás ramas.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="balance">
+      <div class="wrap">
+        <h2>Ventajas y desventajas de Vercel</h2>
+        <div class="dos">
+          <div>
+            <h3>Ventajas</h3>
+            <ul>{ventajas.map((v) => <li>{v}</li>)}</ul>
+          </div>
+          <div>
+            <h3>Desventajas</h3>
+            <ul>{desventajas.map((d) => <li>{d}</li>)}</ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>Equipo:</p>
+      <ul>{equipo.map((n) => <li>{n}</li>)}</ul>
+    </div>
+  </footer>
+</Layout>
